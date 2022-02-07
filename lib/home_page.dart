@@ -9,17 +9,28 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: ListView.builder(
-      itemCount: Repository.charList.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-            title: Center(child: Text(Repository.charList[index].char)),
-            onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ExercisePage(
-                      char: Repository.charList[index].imageTutorialPath)));
-            });
-      },
-    ));
+        body: GridView.count(
+            crossAxisCount: 4,
+            children: List.generate(Repository.charList.length, (index) {
+              return Padding(
+                  padding: EdgeInsets.all(5),
+                  child: Container(
+                    child: ListTile(
+                      title: Text(Repository.charList[index].char,
+                          textAlign: TextAlign.center),
+                      subtitle: Text(Repository.charList[index].name,
+                          textAlign: TextAlign.center),
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ExercisePage(
+                                char: Repository
+                                    .charList[index].imageTutorialPath)));
+                      },
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(5)),
+                  ));
+            })));
   }
 }
