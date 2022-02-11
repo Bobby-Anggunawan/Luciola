@@ -43,7 +43,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   List<ScreenHiddenDrawer> itens = [];
 
   @override
@@ -51,18 +50,22 @@ class _MyHomePageState extends State<MyHomePage> {
     itens.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "Home",
-          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.teal,
-          selectedStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
+          selectedStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
         ),
         HomePage()));
 
     itens.add(new ScreenHiddenDrawer(
         new ItemHiddenMenu(
           name: "About",
-          baseStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
           colorLineSelected: Colors.pink,
-          selectedStyle: TextStyle( color: Colors.white.withOpacity(0.8), fontSize: 28.0 ),
+          selectedStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
         ),
         AboutPage()));
 
