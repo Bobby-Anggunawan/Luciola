@@ -1,11 +1,37 @@
 import 'package:luciola/data/model/character.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../home_page.dart';
 import 'db/app_db.dart';
+
+import 'dart:async';
 
 class Repository {
   static SharedPreferences? savePreference;
   static AppDatabase? saveDB;
+
+  static List<Character>? activeCharacter;
+
+  static CracterGridController globalCracterGridController =
+      CracterGridController();
+
+  static StreamController<bool> streamController =
+      StreamController<bool>.broadcast(
+          onCancel: () => print('MYStream Cancelled'),
+          onListen: () => print('MYStream Listens'),
+          sync: true);
+
+  //tandai karakter yang belum dipelajari jadi dupelajari dan sebaliknya
+  static changeCharacterState(List<int> selectedIndex) {
+    //ubah yang di database
+    final myCharDao = saveDB!.charDao;
+    selectedIndex.forEach((element) {
+      myCharDao.updateLearned(
+          activeCharacter![element].char, !activeCharacter![element].isLearned);
+      activeCharacter![element].isLearned =
+          !activeCharacter![element].isLearned;
+    });
+  }
 
   static Future<List<Character>> getAllCharacter() async {
     if (savePreference == null)
@@ -13,21 +39,24 @@ class Repository {
     if (saveDB == null)
       saveDB = await $FloorAppDatabase.databaseBuilder('app_db.db').build();
 
-    bool? hiraganaPopulated = savePreference!.getBool('hiraganaPopulated');
-    final myCharDao = saveDB!.charDao;
+    if (activeCharacter == null) {
+      bool? hiraganaPopulated = savePreference!.getBool('hiraganaPopulated');
+      final myCharDao = saveDB!.charDao;
 
-    //database masih kosong, tambah data
-    if (hiraganaPopulated == null) {
-      charList.forEach((element) {
-        myCharDao.insertPerson(element);
-      });
+      //jika database masih kosong, tambah data
+      if (hiraganaPopulated == null || hiraganaPopulated == false) {
+        charList.forEach((element) {
+          myCharDao.insertPerson(element);
+        });
 
-      //tandai database terisi
-      await savePreference!.setBool('hiraganaPopulated', true);
+        //tandai database terisi
+        await savePreference!.setBool('hiraganaPopulated', true);
+      }
+
+      activeCharacter = await myCharDao.getAllChar();
     }
-    
 
-    return await myCharDao.getAllChar();
+    return activeCharacter!;
   }
 
   static List<Character> charList = [

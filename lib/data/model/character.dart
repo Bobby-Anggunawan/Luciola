@@ -9,5 +9,5 @@ class Character {
   final String name;
   final String imageTutorialPath;
 
-  final bool isLearned;
+  bool isLearned;
 }

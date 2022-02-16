@@ -70,6 +70,7 @@ class _ExercisePageState extends State<ExercisePage> {
                           ),
                         ]),
                     child: Stack(children: [
+
                       FlutterPainter(
                         controller: controller,
                       ),

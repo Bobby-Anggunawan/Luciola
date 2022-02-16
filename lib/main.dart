@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:luciola/test_page.dart';
 
 import 'about_page.dart';
 import 'data/repository.dart';
@@ -68,6 +69,17 @@ class _MyHomePageState extends State<MyHomePage> {
               TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
         ),
         AboutPage()));
+
+    itens.add(new ScreenHiddenDrawer(
+        new ItemHiddenMenu(
+          name: "Test",
+          baseStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+          colorLineSelected: Colors.pink,
+          selectedStyle:
+              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
+        ),
+        TestPage()));
 
     super.initState();
   }
