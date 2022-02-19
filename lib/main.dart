@@ -70,17 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         AboutPage()));
 
-    itens.add(new ScreenHiddenDrawer(
-        new ItemHiddenMenu(
-          name: "Test",
-          baseStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-          colorLineSelected: Colors.pink,
-          selectedStyle:
-              TextStyle(color: Colors.white.withOpacity(0.8), fontSize: 28.0),
-        ),
-        TestPage()));
-
     super.initState();
   }
 

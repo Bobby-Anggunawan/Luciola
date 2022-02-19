@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                 });
               },
               icon: Icon(Icons.add),
-              label: Text('Learn'),
+              label: Text('mark as learned'),
             )),
         body: FutureBuilder<List<Character>>(
             future: Repository.getAllCharacter(),
